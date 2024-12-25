@@ -13,3 +13,26 @@ a {color:#000;font-size:14px;}
 .hand{cursor:pointer;}
 .say{margin-left:5px;}
 .space{margin-right:150px;}
+.hidden {
+    display: none;
+}
+.center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#show-image {
+    background-color: #ff99cc; /* 更换为柔和的粉红色背景 */
+    color: #5c1c3d; /* 深一点的紫色文字颜色，与粉色搭配 */
+    border: 2px solid #fcb9d1; /* 添加浅粉色边框 */
+    padding: 10px 20px; /* 内边距保持不变 */
+    font-size: 16px; /* 字体大小保持不变 */
+    cursor: pointer; /* 鼠标悬停时的光标样式保持不变 */
+    border-radius: 20px; /* 增大圆角半径以看起来更可爱 */
+    transition: background-color 0.3s, border-color 0.3s; /* 添加边框颜色过渡效果 */
+}
+
+#show-image:hover {
+    background-color: #ffcce5; /* 悬停时使用更浅的粉红色背景 */
+    border-color: #ffe0f0; /* 悬停时的浅粉色边框 */
+}

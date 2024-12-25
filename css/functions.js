@@ -6,6 +6,7 @@
 var $win = $(window);
 var clientWidth = $win.width();
 var clientHeight = $win.height();
+var wait = 75;
 
 $(window).resize(function() {
     var newWidth = $win.width();
@@ -16,7 +17,7 @@ $(window).resize(function() {
 });
 
 (function($) {
-	$.fn.typewriter = function() {
+	$.fn.typewriter = function(callback) {
 		this.each(function() {
 			var $ele = $(this), str = $ele.html(), progress = 0;
 			$ele.html('');
@@ -30,8 +31,11 @@ $(window).resize(function() {
 				$ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
 				if (progress >= str.length) {
 					clearInterval(timer);
+					if (callback && typeof callback === "function") {
+						callback();  // 在打字完成后调用回调函数
+					}
 				}
-			}, 75);
+			}, wait);
 		});
 		return this;
 	};
