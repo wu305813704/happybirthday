@@ -1,12 +1,21 @@
-/*
- * http://love.hackerzhou.me
- */
-
 // variables
+
+//打字等待时间
+// var wait = 75;
+var wait = 1;
+//树叶生成速度
+// var createSpeed = 1;
+var createSpeed = 10;
+//地面生成速度
+// var footerSpeed = 1;
+var footerSpeed = 10;
+//树叶掉落速度
+// var leafFallSpeed = 1;
+var leafFallSpeed = 25;
+
 var $win = $(window);
 var clientWidth = $win.width();
 var clientHeight = $win.height();
-var wait = 75;
 
 $(window).resize(function() {
     var newWidth = $win.width();

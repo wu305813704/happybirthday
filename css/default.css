@@ -20,7 +20,14 @@ a {color:#000;font-size:14px;}
     text-align: center;
     margin-top: 20px;
 }
+.image-container {
+    text-align: center;
+    margin-top: 20px;
+}
 
+#password-box {
+    margin-top: 20px;
+}
 #show-image {
     background-color: #ff99cc; /* 更换为柔和的粉红色背景 */
     color: #5c1c3d; /* 深一点的紫色文字颜色，与粉色搭配 */
