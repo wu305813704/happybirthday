@@ -43,3 +43,9 @@ a {color:#000;font-size:14px;}
     background-color: #ffcce5; /* 悬停时使用更浅的粉红色背景 */
     border-color: #ffe0f0; /* 悬停时的浅粉色边框 */
 }
+
+#error-message {
+    color: red;
+    font-size: 14px;
+    margin-left: 10px;
+}

@@ -4,15 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>生日快乐!</title>
     <link type="text/css" rel="stylesheet" href="./css/default.css">
-    <script type="text/javascript" src="./css/jquery.min.js"></script>
-    <script type="text/javascript" src="./css/jscex.min.js"></script>
-    <script type="text/javascript" src="./css/jscex-parser.js"></script>
-    <script type="text/javascript" src="./css/jscex-jit.js"></script>
-    <script type="text/javascript" src="./css/jscex-builderbase.min.js"></script>
-    <script type="text/javascript" src="./css/jscex-async.min.js"></script>
-    <script type="text/javascript" src="./css/jscex-async-powerpack.min.js"></script>
-    <script type="text/javascript" src="./css/functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./css/love.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/jscex.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-parser.js"></script>
+    <script type="text/javascript" src="./js/jscex-jit.js"></script>
+    <script type="text/javascript" src="./js/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-async.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="./js/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
 </head>
 <body>
 <audio autoplay muted>
@@ -23,15 +23,16 @@
         <div id="text">
             <div id="code">
                 <font color="#FF0000">
-                    <span class="say"><h1>我希望有个如你一般的人。</h1></span><br><br>
-                    <span class="say">我希望有个如你一般的人。</span><br> <br>
-                    <span class="say">如这山间清晨一般明亮清爽，</span><br><br>
-                    <span class="say">如奔赴古城道路上阳光一般的人，</span><br><br>
-                    <span class="say">温暖而不炙热，覆盖我所有肌肤。</span><br><br>
-                    <span class="say">由起点到夜晚，由山野到书房，一切问题的答案都很简单。</span><br><br>
-                    <span class="say">我希望有个如你一般的人，贯彻未来，数遍生命的公路牌。</span><br><br>
-                    <span class="say"><span class="space"></span> -- 伍康祺--</span><br>
-                    <span class="say"><h1>生日快乐!</h1></span><br>
+<!--                    <span class="say"><h1>我希望有个如你一般的人。</h1></span><br><br>-->
+<!--                    <span class="say">我希望有个如你一般的人。</span><br> <br>-->
+<!--                    <span class="say">如这山间清晨一般明亮清爽，</span><br><br>-->
+<!--                    <span class="say">如奔赴古城道路上阳光一般的人，</span><br><br>-->
+<!--                    <span class="say">温暖而不炙热，覆盖我所有肌肤。</span><br><br>-->
+<!--                    <span class="say">由起点到夜晚，由山野到书房，一切问题的答案都很简单。</span><br><br>-->
+<!--                    <span class="say">我希望有个如你一般的人，贯彻未来，数遍生命的公路牌。</span><br><br>-->
+<!--                    <span class="say"><span class="space"></span> &#45;&#45; 伍康祺 &#45;&#45;</span><br>-->
+<!--                    <span class="say"><h1>生日快乐!</h1></span><br>-->
+                    <span class="say"><h1>test!</h1></span><br>
                 </font>
             </div>
         </div>
@@ -45,17 +46,18 @@
     </div>
 
     <div id="image-box" class="image-container hidden">
-        <img id="first-image" src="images/aaa.png" alt="First Image" width="300"/>
+        <img id="first-image" src="images/1.png" alt="First Image" width="300"/>
         <div id="password-box">
             <p>请根据纸条上的提示，输入暗号以解锁更多精彩：</p>
             <label for="password">暗号：</label>
             <input type="password" id="password"/>
             <button id="submit-password">提交</button>
+            <div id="error-message" class="hidden">密码错误，请重新输入！</div>
         </div>
     </div>
 
     <div id="second-image-box" class="image-container hidden">
-        <img id="second-image" src="images/bbb.png" alt="Second Image" width="300"/>
+        <img id="second-image" src="images/2.png" alt="Second Image" width="300"/>
     </div>
 </div>
 
@@ -188,13 +190,12 @@
 
         var textAnimate = eval(Jscex.compile("async", function () {
             var together = new Date();
-            together.setFullYear(2009, 10, 23);      //时间年月日
+            together.setFullYear(2018, 2, 15);      //时间年月日
             together.setHours(16);            //小时
             together.setMinutes(53);          //分钟
             together.setSeconds(0);         //秒前一位
             together.setMilliseconds(2);        //秒第二位
 
-            // $("#code").show().typewriter();
             $("#code").show().typewriter(function () {
                 // 文字打完后的回调
                 $("#button-box").removeClass("hidden");
@@ -229,8 +230,9 @@
             if (password === "1234") {
                 $("#image-box").addClass("hidden");
                 $("#second-image-box").removeClass("hidden");
+                $("#error-message").addClass("hidden"); // 确保提示框隐藏
             } else {
-                alert("密码错误，请重新输入！");
+                $("#error-message").removeClass("hidden"); // 显示提示框
             }
         });
     })();
