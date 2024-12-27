@@ -1,366 +1,271 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-CN">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>生日快乐!</title>
-    <link type="text/css" rel="stylesheet" href="./css/default.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>送你一朵玫瑰花</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="./js/jscex.min.js"></script>
-    <script type="text/javascript" src="./js/jscex-parser.js"></script>
-    <script type="text/javascript" src="./js/jscex-jit.js"></script>
-    <script type="text/javascript" src="./js/jscex-builderbase.min.js"></script>
-    <script type="text/javascript" src="./js/jscex-async.min.js"></script>
-    <script type="text/javascript" src="./js/jscex-async-powerpack.min.js"></script>
-    <script type="text/javascript" src="./js/functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
+    <link rel="shortcut icon" href="./images/effect.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-<audio autoplay muted>
-    <source src="music/love.mp3" type="audio/mp3"/>
-</audio>
-<div id="main">
-    <div id="wrap">
-        <div id="text">
-            <div id="code">
-                <font color="#FF0000">
-                    <span class="say"><h2>亲爱的，生日快乐！</h2></span>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;时光荏苒，转眼间我们已经携手走过了<span id="time-elapsed"/>的美好时光。每一个与你共度的日子，都充满了无尽的爱意和欢笑。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;今天是你的特别日子，是你来到这个世界上的纪念日，也是我心中最珍贵的一天。在这个属于你的时刻，我想告诉你，遇见你是命运最美的安排，而能够成为你的丈夫是我最大的荣幸。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;愿你的每一天都如阳光般灿烂，每一个微笑都能照亮我的世界。希望新的一岁里，健康、快乐永远伴随着你；愿所有的梦想都能实现，所有的期待都不会落空。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;感谢你一直以来的支持和陪伴，让我们一起继续书写属于我们的故事。未来的日子里，不管风雨还是晴空，我都愿意牵着你的手，一同面对，共同成长。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;亲爱的，生日快乐！愿我们的爱情如同美酒，越陈越香；愿我们的生活似诗篇，字字珠玑。再次祝你生日快乐，我爱你！</span>
-                </font>
+<style id="styleText"></style>
+<div id="wrapper">
+    <div class="container">
+        <div class="rose">
+            <div class="stem"></div>
+            <div class="thorns">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
+            <div class="leaves">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dead-petals">
+                <div></div>
+                <div></div>
+            </div>
+            <div class="petals">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="dead-petal"></div>
+            <div class="shine"></div>
         </div>
-        <div id="clock-box"></div>
-        <canvas id="canvas" width="1000" height="680"></canvas>
-    </div>
-    <div id="corner-image" class="center hidden">
-        <img src="images/love.jpg" alt="Corner Image" width="1000" height="680"/>
-    </div>
-    <!-- 新增内容 -->
-    <div id="date-input-box" class="center hidden">
-        <p>请根据页面内容，输入爱上你的日期(格式为：20200520)</p>
-        <label for="love-date">日期：</label>
-        <input type="text" id="love-date"/>
-        <button id="submit-date">确定</button>
-        <div id="date-error-message" class="hidden"></div>
-    </div>
-
-    <div id="button-box" class="center hidden">
-        <button id="show-image">领取我的生日礼物</button>
-    </div>
-
-
-    <div id="image-box" class="image-container hidden">
-        <div id="password-box">
-            <p>请根据纸条上的提示，输入暗号以解锁更多精彩：</p>
-            <label for="password">暗号：</label>
-            <input type="password" id="password"/>
-            <button id="submit-password">提交</button>
-            <div id="error-message" class="hidden">暗号不对哦！</div>
+        <div class="wishes">
+            <div>生日快乐！</div>
+            <div>花花送给你！</div>
+            <div>永远十八岁！</div>
+            <div>一夜暴富！</div>
+            <div>爱你一生一世！</div>
+            <div>健康长寿，笑口常开！</div>
+            <div>愿我们的爱永不褪色！</div>
         </div>
-    </div>
 
+    </div>
+    <div id="html-text"></div>
 </div>
-
 <script>
     (function () {
-        var canvas = $('#canvas');
+        let html = document.querySelector("#html-text");
+        let style = document.querySelector("#styleText");
 
-        if (!canvas[0].getContext) {
-            $("#error").show();
-            return false;
-        }
+        let originalString = `送你一朵玫瑰花，接住咯~
+先画花的茎
+.stem {
+    position: absolute;
+    height: 0;
+    width: 6px;
+    background: var(--dark-green);
+    bottom: 10%;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 0 0 3px 3px;
+    transition: height 1s;
+}
+.stem {
+  height: 200px;
+}
+.thorns>div{
+    width: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    position: absolute;
+}
+.thorns>div:first-child {
+    border-right: 10px solid var(--dark-green);
+    position: absolute;
+    left: 44%;
+    top: 50%;
+}
+.thorns>div:nth-child(2) {
+    border-left: 10px solid var(--dark-green);
+    right: 44%;
+    top: 60%;
+}
+.thorns>div:nth-child(3) {
+    border-right: 10px solid var(--dark-green);
+    left: 44%;
+    top: 70%;
+}
+再画花的叶
+.leaves>div{
+    position: absolute;
+    height: 60px;
+    width: 35px;
+}
+.leaves>div:first-child {
+    border-radius: 0 30px 0 30px;
+    transform: rotate(-20deg);
+    top: 55%;
+    left: 28%;
+    transition: background 1s, box-shadow 1s 1s;
+    background: var(--dark-green);
+    box-shadow: inset 5px 5px var(--light-green);
+}
+.leaves>div:nth-child(2) {
+    border-radius: 30px 0 30px 0;
+    transform: rotate(20deg);
+    top: 45%;
+    right: 28%;
+    transition: background 1s, box-shadow 1s 1s;
+    background: var(--dark-green);
+    box-shadow: inset -5px 5px var(--light-green);
+}
+最后画花瓣
+.petals>div:first-child {
+    position: absolute;
+    height: 100px;
+    width: 50px;
+    border-radius: 10px 10px 20px 20px;
+    transition: background 1s;
+    background: var(--light-pink);
+    top: 15%;
+    left: 50%;
+    margin-left: -25px;
+}
+.petals>div:not(:first-child) {
+    position: absolute;
+    height: 100px;
+    width: 40px;
+}
+.petals>div:nth-child(2) {
+    transform-origin: bottom right;
+    border-radius: 0 35px 0 35px;
+    transition: background 1s, transform 1s 1s;
+    background: var(--medium-pink);
+    transform: rotate(-6deg);
+    top: 15%;
+    left: 30%;
+}
+.petals>div:nth-child(3) {
+    transform-origin: bottom left;
+    border-radius: 35px 0 35px 0;
+    transition: background 1s, transform 1s 1s;
+    background: var(--medium-pink);
+    transform: rotate(6deg);
+    top: 15%;
+    right: 30%;
+}
+.petals>div:nth-child(4) {
+    transform-origin: bottom right;
+    border-radius: 0 35px 0 35px;
+    transition: background 1s, transform 1s 1s;
+    background: var(--dark-pink);
+    transform: rotate(-18deg);
+    top: 15%;
+    left: 30%;
+}
+.petals>div:nth-child(5) {
+    transform-origin: bottom left;
+    border-radius: 35px 0 35px 0;
+    transition: background 1s, transform 1s 1s;
+    background: var(--dark-pink);
+    transform: rotate(18deg);
+    top: 15%;
+    right: 30%;
+}
+.dead-petals>div:first-child {
+    background: var(--medium-pink);
+    left: 35%;
+    transition: transform 8s, top 8s;
+    transform: rotate(-45deg);
+    top: 90%;
+}
+.dead-petals>div:nth-child(2) {
+    background: var(--dark-pink);
+    left: 50%;
+    transition: transform 8s 2s, top 8s 2s;
+    transform: rotate(-20deg);
+    top: 90%;
+}
+开始刷弹幕：
+生日快乐！
+花花送给你！
+永远十八岁！
+一夜暴富！
+爱你一生一世！
+健康长寿，笑口常开！
+愿我们的爱永不褪色！
+.wishes>div:first-child {
+    transform: translate(-80%);
+}
+.wishes>div:nth-child(2) {
+    transform: translate(-30%);
+}
+.wishes>div:nth-child(3) {
+    transform: translate(-95%);
+}
+.wishes>div:nth-child(4) {
+    transform: translate(-45%);
+}
+.wishes>div:nth-child(5) {
+    transform: translate(-40%);
+}
+.wishes>div:nth-child(6) {
+    transform: translate(-95%);
+}
+.wishes>div:nth-child(7) {
+    transform: translate(-95%);
+}
+`;
 
-        var width = canvas.width();
-        var height = canvas.height();
-        canvas.attr("width", width);
-        canvas.attr("height", height);
-        var opts = {
-            seed: {
-                x: width / 2 + 30,
-                color: "rgb(190, 26, 37)",
-                scale: 2
-            },
-            branch: [
-                [535, 680, 570, 250, 500, 200, 30, 100, [
-                    [540, 500, 455, 417, 340, 400, 13, 100, [
-                        [450, 435, 434, 430, 394, 395, 2, 40]
-                    ]],
-                    [550, 445, 600, 356, 680, 345, 12, 100, [
-                        [578, 400, 648, 409, 661, 426, 3, 80]
-                    ]],
-                    [539, 281, 537, 248, 534, 217, 3, 40],
-                    [546, 397, 413, 247, 328, 244, 9, 80, [
-                        [427, 286, 383, 253, 371, 205, 2, 40],
-                        [498, 345, 435, 315, 395, 330, 4, 60]
-                    ]],
-                    [546, 357, 608, 252, 678, 221, 6, 100, [
-                        [590, 293, 646, 277, 648, 271, 2, 80]
-                    ]]
-                ]]
-            ],
-            bloom: {
-                num: 700,
-                width: 1080,
-                height: 650,
-            },
-            footer: {
-                width: 1200,
-                height: 5,
-                speed: footerSpeed,
-            }
-        }
+        let showString = "";
+        let styleString = "";
+        let tempString = "";
 
-        var tree = new Tree(canvas[0], width, height, opts);
-        var seed = tree.seed;
-        var foot = tree.footer;
-        var hold = 1;
+        let writeIntoStyle = false;
 
-        canvas.click(function (e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0;
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
-            }
-        }).mousemove(function (e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
-        });
-
-        var seedAnimate = eval(Jscex.compile("async", function () {
-            seed.draw();
-            while (hold) {
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canScale()) {
-                seed.scale(0.95);
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canMove()) {
-                seed.move(0, 2);
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-        }));
-
-        var growAnimate = eval(Jscex.compile("async", function () {
-            do {
-                tree.grow();
-                $await(Jscex.Async.sleep(createSpeed));
-            } while (tree.canGrow());
-        }));
-
-        var flowAnimate = eval(Jscex.compile("async", function () {
-            do {
-                tree.flower(2);
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canFlower());
-        }));
-
-        var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
-            while (tree.move("p1", 420, 0)) {
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-            foot.draw();
-            tree.snapshot("p2", 420, 0, 610, 680);
-
-            // 会有闪烁不得意这样做, (＞﹏＜)
-            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
-            $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
-        }));
-
-        var jumpAnimate = eval(Jscex.compile("async", function () {
-            var ctx = tree.ctx;
-            while (true) {
-                tree.ctx.clearRect(0, 0, width, height);
-                tree.jump();
-                foot.draw();
-                $await(Jscex.Async.sleep(leafFallSpeed));
-            }
-        }));
-
-        var textAnimate = eval(Jscex.compile("async", function () {
-            var together = new Date();
-            together.setFullYear(2018, 2, 17);      //时间年月日
-            together.setHours(11);            //小时
-            together.setMinutes(0);          //分钟
-            together.setSeconds(0);         //秒前一位
-            together.setMilliseconds(0);        //秒第二位
-
-            $("#code").show().typewriter(function () {
-                // 文字打完后的回调
-                $("#clock-box").fadeIn(2000);
-                setTimeout(function () {
-                    $("#corner-image").fadeIn(2000);
-                }, 1000);
-                // 显示日期输入框
-                $("#date-input-box").fadeIn(1000);
-            });
-            while (true) {
-                timeElapse(together);
-                $await(Jscex.Async.sleep(998));
-            }
-        }));
-
-        var runAsync = eval(Jscex.compile("async", function () {
-            $await(seedAnimate());
-            $await(growAnimate());
-            $await(flowAnimate());
-            $await(moveAnimate());
-
-            textAnimate().start();
-
-            $await(jumpAnimate());
-        }));
-
-        runAsync().start();
-
-        // 处理日期提交
-        $("#submit-date").on("click", function () {
-            var loveDate = $("#love-date").val();
-            if (loveDate === "20180217") {
-                $("#date-input-box").hide();
-                $("#button-box").fadeIn(1000);
-                $("#date-error-message").hide(); // 确保提示框隐藏
-            } else {
-                // 使用随机提示
-                var errorMessage = getRandomErrorMessage();
-                $("#date-error-message").text(errorMessage).show(); // 确保提示框隐藏
-            }
-        });
-
-        $("#show-image").on("click", function () {
-            $("#corner-image img").attr("src", "images/1.png");
-            $("#button-box").addClass("hidden");
-            $("#image-box").fadeIn(1000);
-            $("#show-image").hide();
-        });
-
-        $("#submit-password").on("click", function () {
-            var password = $("#password").val();
-            if (password === "1234") {
-                $("#corner-image img").attr("src", "images/2.png");
-                $("#error-message").hide() // 确保提示框隐藏
-                $("#image-box").hide() // 隐藏提交和提示
-            } else {
-                $("#error-message").removeClass("hidden"); // 显示提示框
-            }
-        });
-
-        // 定义礼物和蛋糕的数组
-        var gifts = [];
-        var cakes = [];
-
-        // 定义生成礼物和蛋糕的函数
-        function createGift() {
-            var gift = $('<div class="gift"></div>');
-            gift.css({
-                left: Math.random() * 1100 + 'px',
-                top: '-50px'
-            });
-            $('#main').append(gift);
-            gifts.push(gift);
-        }
-
-        function createCake() {
-            var cake = $('<div class="cake"></div>');
-            cake.css({
-                left: Math.random() * 1100 + 'px',
-                top: '-50px'
-            });
-            $('#main').append(cake);
-            cakes.push(cake);
-        }
-
-        // 定义礼物和蛋糕的动画函数
-        function animateGifts() {
-            gifts.forEach(function (gift, index) {
-                var top = parseInt(gift.css('top'));
-                if (top > 660) {
-                    // 增加透明度动画
-                    gift.animate({opacity: 0}, 500, function () {
-                        gift.remove();
-                        gifts.splice(index, 1);
-                    });
+        let n = 0;
+        let step = () => {
+            html.innerHTML = showString;
+            style.innerHTML = styleString;
+            setTimeout(() => {
+                // 删去无用字符
+                if (originalString[n] === "\n") {
+                    showString += "<br>";
+                } else if (originalString[n] === " ") {
+                    showString += "&nbsp;";
                 } else {
-                    gift.css('top', top + 2 + 'px');
+                    showString += originalString[n];
                 }
-            });
-        }
 
-        function animateCakes() {
-            cakes.forEach(function (cake, index) {
-                var top = parseInt(cake.css('top'));
-                if (top > 660) {
-                    // 增加透明度动画
-                    cake.animate({opacity: 0}, 500, function () {
-                        cake.remove();
-                        cakes.splice(index, 1);
-                    });
+                // 判断何时输入到style中
+                if (originalString[n] === "#" || originalString[n] === '.') {
+                    writeIntoStyle = true;
+                } else if (originalString[n] === "}") {
+                    writeIntoStyle = false
+                    tempString += "}\n"
+                    styleString += tempString;
+                    console.log(tempString)
+                }
+                if (writeIntoStyle === true) {
+                    tempString += originalString[n];
+                }
+
+                // 没病滚一下
+                window.scrollTo(0, 99999);
+                html.scrollTo(0, 99999);
+                // 判断到没到头
+                if (n < originalString.length) {
+                    n += 1;
+                    step();
                 } else {
-                    cake.css('top', top + 2 + 'px');
+                    setTimeout(function () {
+                        window.location.href = 'birthday.html';
+                    }, 2000);
                 }
-            });
+            }, 1)
+
         }
-
-        // 定义定时器来生成礼物和蛋糕
-        setInterval(createGift, 2000);
-        setInterval(createCake, 3000);
-
-        // 定义定时器来动画化礼物和蛋糕
-        setInterval(animateGifts, 20);
-        setInterval(animateCakes, 20);
-
-        function calculateTimeElapsed(startDate) {
-            const now = new Date();
-            const diffTime = now - startDate;
-            const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
-            const diffDays = Math.floor((diffTime % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-            return `${diffYears}年+${diffDays}天`;
-        }
-
-        $(document).ready(function () {
-            const startDate = new Date(2020, 9, 4); // 2020年10月4日
-            const timeElapsedElement = $("#time-elapsed");
-
-            function updateElapsedTime() {
-                timeElapsedElement.text(calculateTimeElapsed(startDate));
-            }
-
-            updateElapsedTime(); // 初始化
-            setInterval(updateElapsedTime, 998); // 每秒更新一次
-        });
-        // 用于存储已经显示过的提示索引
-        var usedIndexes = [];
-
-        // 从提示数组中随机选择一个未使用的提示
-        function getRandomErrorMessage() {
-            if (usedIndexes.length === errorMessages.length) {
-                // 如果所有提示都已使用，返回一个默认提示
-                return "这么久都没答上来，让我来告诉你吧，正确的日期是：20180217";
-            }
-
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * errorMessages.length);
-            } while (usedIndexes.includes(randomIndex));
-
-            usedIndexes.push(randomIndex);
-            return errorMessages[randomIndex];
-        }
-
+        step();
     })();
 </script>
 </body>
