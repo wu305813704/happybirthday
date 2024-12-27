@@ -182,3 +182,15 @@ a {
     border-color: #ffcce5; /* 悬停时的浅粉色边框 */
     outline: none; /* 移除默认的聚焦样式 */
 }
+#password-box p {
+    color: #5c1c3d; /* 与页面文字颜色一致 */
+    font-size: 16px; /* 字体大小 */
+    line-height: 1.5; /* 行高 */
+    margin-bottom: 10px; /* 底部外边距 */
+}
+
+#password-box label {
+    color: #5c1c3d; /* 与页面文字颜色一致 */
+    font-size: 16px; /* 字体大小 */
+    margin-right: 10px; /* 右侧外边距 */
+}
