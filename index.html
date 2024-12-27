@@ -41,9 +41,18 @@
         <img src="images/love.jpg" alt="Corner Image" width="1000" height="680"/>
     </div>
     <!-- 新增内容 -->
+    <div id="date-input-box" class="center hidden">
+        <p>请根据页面内容，输入爱上你的日期(格式为：20200520)</p>
+        <label for="love-date">日期：</label>
+        <input type="text" id="love-date"/>
+        <button id="submit-date">确定</button>
+        <div id="date-error-message" class="hidden">日期不对哦！再想想~</div>
+    </div>
+
     <div id="button-box" class="center hidden">
         <button id="show-image">领取我的生日礼物</button>
     </div>
+
 
     <div id="image-box" class="image-container hidden">
         <div id="password-box">
@@ -198,11 +207,8 @@
                 setTimeout(function () {
                     $("#corner-image").fadeIn(2000);
                 }, 1000);
-
-                setTimeout(function () {
-                    $("#button-box").fadeIn(2000);
-                }, 2000);
-
+                // 显示日期输入框
+                $("#date-input-box").fadeIn(1000);
             });
             while (true) {
                 timeElapse(together);
@@ -223,18 +229,31 @@
 
         runAsync().start();
 
+        // 处理日期提交
+        $("#submit-date").on("click", function () {
+            var loveDate = $("#love-date").val();
+            if (loveDate === "20180217") {
+                $("#date-input-box").hide();
+                $("#button-box").fadeIn(1000);
+                $("#date-error-message").addClass("hidden"); // 确保提示框隐藏
+            } else {
+                $("#date-error-message").removeClass("hidden"); // 显示提示框
+            }
+        });
+
         $("#show-image").on("click", function () {
             $("#corner-image img").attr("src", "images/1.png");
             $("#button-box").addClass("hidden");
             $("#image-box").fadeIn(1000);
+            $("#show-image").hide();
         });
 
         $("#submit-password").on("click", function () {
             var password = $("#password").val();
             if (password === "1234") {
                 $("#corner-image img").attr("src", "images/2.png");
-                $("#error-message").addClass("hidden"); // 确保提示框隐藏
-                $("#show-image").addClass("hidden");
+                $("#error-message").hide() // 确保提示框隐藏
+                $("#image-box").hide() // 隐藏提交和提示
             } else {
                 $("#error-message").removeClass("hidden"); // 显示提示框
             }
