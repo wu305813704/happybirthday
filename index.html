@@ -29,8 +29,6 @@
                     <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;愿你的每一天都如阳光般灿烂，每一个微笑都能照亮我的世界。希望新的一岁里，健康、快乐永远伴随着你；愿所有的梦想都能实现，所有的期待都不会落空。</span><br>
                     <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;感谢你一直以来的支持和陪伴，让我们一起继续书写属于我们的故事。未来的日子里，不管风雨还是晴空，我都愿意牵着你的手，一同面对，共同成长。</span><br>
                     <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;亲爱的，生日快乐！愿我们的爱情如同美酒，越陈越香；愿我们的生活似诗篇，字字珠玑。再次祝你生日快乐，我爱你！</span>
-                    <span class="say"><h2 class="gradient-text">爱你的</h2></span><br>
-
                 </font>
             </div>
         </div>
@@ -46,7 +44,7 @@
         <label for="love-date">日期：</label>
         <input type="text" id="love-date"/>
         <button id="submit-date">确定</button>
-        <div id="date-error-message" class="hidden">日期不对哦！再想想~</div>
+        <div id="date-error-message" class="hidden"></div>
     </div>
 
     <div id="button-box" class="center hidden">
@@ -81,7 +79,7 @@
         canvas.attr("height", height);
         var opts = {
             seed: {
-                x: width / 2 - 20,
+                x: width / 2 + 30,
                 color: "rgb(190, 26, 37)",
                 scale: 2
             },
@@ -235,9 +233,11 @@
             if (loveDate === "20180217") {
                 $("#date-input-box").hide();
                 $("#button-box").fadeIn(1000);
-                $("#date-error-message").addClass("hidden"); // 确保提示框隐藏
+                $("#date-error-message").hide(); // 确保提示框隐藏
             } else {
-                $("#date-error-message").removeClass("hidden"); // 显示提示框
+                // 使用随机提示
+                var errorMessage = getRandomErrorMessage();
+                $("#date-error-message").text(errorMessage).show(); // 确保提示框隐藏
             }
         });
 
@@ -328,7 +328,7 @@
             const diffTime = now - startDate;
             const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
             const diffDays = Math.floor((diffTime % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
-            return `${diffYears}年${diffDays}天`;
+            return `${diffYears}年+${diffDays}天`;
         }
 
         $(document).ready(function () {
@@ -340,8 +340,27 @@
             }
 
             updateElapsedTime(); // 初始化
-            setInterval(updateElapsedTime, 990); // 每秒更新一次
+            setInterval(updateElapsedTime, 998); // 每秒更新一次
         });
+        // 用于存储已经显示过的提示索引
+        var usedIndexes = [];
+
+        // 从提示数组中随机选择一个未使用的提示
+        function getRandomErrorMessage() {
+            if (usedIndexes.length === errorMessages.length) {
+                // 如果所有提示都已使用，返回一个默认提示
+                return "这么久都没答上来，让我来告诉你吧，正确的日期是：20180217";
+            }
+
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * errorMessages.length);
+            } while (usedIndexes.includes(randomIndex));
+
+            usedIndexes.push(randomIndex);
+            return errorMessages[randomIndex];
+        }
+
     })();
 </script>
 </body>

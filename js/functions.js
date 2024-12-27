@@ -68,6 +68,14 @@ function timeElapse(date){
 	if (seconds < 10) {
 		seconds = "0" + seconds;
 	}
-	var result = "<span style=\"color: red;\">第</span><span class=\"digit\">" + days + "</span> <span style=\"color: blue;\">天</span><span class=\"digit\">" + hours + "</span> <span style=\"color: green;\">小时</span><span class=\"digit\">" + minutes + "</span> <span style=\"color: orange;\">分钟</span><span class=\"digit\">" + seconds + "</span> <span style=\"color: purple;\">秒</span>";
+	var result = "<span class=\"gradient-text\">爱你的</span><span style=\"color: red;\">第</span><span class=\"digit\">" + days + "</span> <span style=\"color: blue;\">天</span><span class=\"digit\">" + hours + "</span> <span style=\"color: green;\">小时</span><span class=\"digit\">" + minutes + "</span> <span style=\"color: orange;\">分钟</span><span class=\"digit\">" + seconds + "</span> <span style=\"color: purple;\">秒</span>";
 	$("#clock-box").html(result);
 }
+// 提示数组
+var errorMessages = [
+    "想想我们第一次见面是什么时候~",
+    "可以问一下AI倒推一下日期哦~",
+    "是不是记错了？再试一次呢。",
+    "别灰心，再想想看。",
+    "日期格式应该是：20200520"
+];
