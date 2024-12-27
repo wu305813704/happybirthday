@@ -116,6 +116,17 @@ a {
     transition: background-color 0.3s, border-color 0.3s; /* 添加边框颜色过渡效果 */
 }
 
+#submit-password {
+    background-color: #ff99cc; /* 更换为柔和的粉红色背景 */
+    color: #5c1c3d; /* 深一点的紫色文字颜色，与粉色搭配 */
+    border: 2px solid #fcb9d1; /* 添加浅粉色边框 */
+    padding: 10px 20px; /* 内边距保持不变 */
+    font-size: 16px; /* 字体大小保持不变 */
+    cursor: pointer; /* 鼠标悬停时的光标样式保持不变 */
+    border-radius: 20px; /* 增大圆角半径以看起来更可爱 */
+    transition: background-color 0.3s, border-color 0.3s; /* 添加边框颜色过渡效果 */
+}
+
 #show-image:hover {
     background-color: #ffcce5; /* 悬停时使用更浅的粉红色背景 */
     border-color: #ffe0f0; /* 悬停时的浅粉色边框 */
@@ -155,4 +166,19 @@ a {
     background: linear-gradient(to right, #9966cc, #ffcccc); /* 渐变色 */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+#password {
+    background-color: #ffe; /* 与页面背景颜色一致 */
+    color: #231F20; /* 与页面文字颜色一致 */
+    border: 2px solid #fcb9d1; /* 添加浅粉色边框 */
+    padding: 10px; /* 内边距 */
+    font-size: 16px; /* 字体大小 */
+    border-radius: 20px; /* 圆角 */
+    transition: border-color 0.3s; /* 添加边框颜色过渡效果 */
+}
+
+#password:focus {
+    border-color: #ffcce5; /* 悬停时的浅粉色边框 */
+    outline: none; /* 移除默认的聚焦样式 */
 }

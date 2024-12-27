@@ -38,7 +38,7 @@
         <canvas id="canvas" width="1000" height="680"></canvas>
     </div>
     <div id="corner-image" class="center hidden">
-        <img src="images/love.jpg" alt="Corner Image"  width="1000" height="680"/>
+        <img src="images/love.jpg" alt="Corner Image" width="1000" height="680"/>
     </div>
     <!-- 新增内容 -->
     <div id="button-box" class="center hidden">
@@ -51,14 +51,10 @@
             <label for="password">暗号：</label>
             <input type="password" id="password"/>
             <button id="submit-password">提交</button>
-            <div id="error-message" class="hidden">密码错误，请重新输入！</div>
+            <div id="error-message" class="hidden">暗号不对哦！</div>
         </div>
-        <img id="first-image" src="images/1.png" alt="First Image" width="300"/>
     </div>
 
-    <div id="second-image-box" class="image-container hidden">
-        <img id="second-image" src="images/2.png" alt="Second Image" width="300"/>
-    </div>
 </div>
 
 <script>
@@ -199,8 +195,14 @@
             $("#code").show().typewriter(function () {
                 // 文字打完后的回调
                 $("#clock-box").fadeIn(2000);
-                setTimeout($("#corner-image").fadeIn(2000), 2000);
-                setTimeout($("#button-box").fadeIn(2000), 4000);
+                setTimeout(function () {
+                    $("#corner-image").fadeIn(2000);
+                }, 1500);
+
+                setTimeout(function () {
+                    $("#button-box").fadeIn(2000);
+                }, 3500);
+
             });
             while (true) {
                 timeElapse(together);
@@ -222,16 +224,17 @@
         runAsync().start();
 
         $("#show-image").on("click", function () {
-            $("#image-box").removeClass("hidden");
+            $("#corner-image img").attr("src", "images/1.png");
             $("#button-box").addClass("hidden");
+            $("#image-box").fadeIn(1000);
         });
 
         $("#submit-password").on("click", function () {
             var password = $("#password").val();
             if (password === "1234") {
-                $("#image-box").addClass("hidden");
-                $("#second-image-box").removeClass("hidden");
+                $("#corner-image img").attr("src", "images/2.png");
                 $("#error-message").addClass("hidden"); // 确保提示框隐藏
+                $("#show-image").addClass("hidden");
             } else {
                 $("#error-message").removeClass("hidden"); // 显示提示框
             }
