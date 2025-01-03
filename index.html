@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>送你一朵玫瑰花</title>
+    <title>祝老婆生日快乐</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="shortcut icon" href="./images/effect.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -44,7 +44,7 @@
             <div>花花送给你！</div>
             <div>永远十八岁！</div>
             <div>一夜暴富！</div>
-            <div>爱你一生一世！</div>
+            <div>琴瑟"祺"鸣！</div>
             <div>健康长寿，笑口常开！</div>
             <div>愿我们的爱永不褪色！</div>
         </div>
@@ -191,7 +191,7 @@
 花花送给你！
 永远十八岁！
 一夜暴富！
-爱你一生一世！
+琴瑟"祺"鸣！
 健康长寿，笑口常开！
 愿我们的爱永不褪色！
 .wishes>div:first-child {
@@ -224,7 +224,8 @@
         let writeIntoStyle = false;
 
         let n = 0;
-        let step = () => {
+        let timer = 150;
+        let step = (t) => {
             html.innerHTML = showString;
             style.innerHTML = styleString;
             setTimeout(() => {
@@ -240,11 +241,13 @@
                 // 判断何时输入到style中
                 if (originalString[n] === "#" || originalString[n] === '.') {
                     writeIntoStyle = true;
+                    timer = 1;
                 } else if (originalString[n] === "}") {
                     writeIntoStyle = false
                     tempString += "}\n"
                     styleString += tempString;
                     console.log(tempString)
+                    timer = 150;
                 }
                 if (writeIntoStyle === true) {
                     tempString += originalString[n];
@@ -256,16 +259,16 @@
                 // 判断到没到头
                 if (n < originalString.length) {
                     n += 1;
-                    step();
+                    step(timer);
                 } else {
                     setTimeout(function () {
                         window.location.href = 'birthday.html';
-                    }, 2000);
+                    }, 4000);
                 }
-            }, 1)
+            }, t)
 
         }
-        step();
+        step(timer);
     })();
 </script>
 </body>

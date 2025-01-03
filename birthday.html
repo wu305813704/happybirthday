@@ -15,7 +15,7 @@
     <script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
 </head>
 <body>
-<audio autoplay muted>
+<audio id="birthday-audio">
     <source src="music/love.mp3" type="audio/mp3"/>
 </audio>
 <div id="main">
@@ -25,10 +25,10 @@
                 <font color="#FF0000">
                     <span class="say"><h2>亲爱的，生日快乐！</h2></span>
                     <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;时光荏苒，转眼间我们已经携手走过了<span id="time-elapsed"/>的美好时光。每一个与你共度的日子，都充满了无尽的爱意和欢笑。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;今天是你的特别日子，是你来到这个世界上的纪念日，也是我心中最珍贵的一天。在这个属于你的时刻，我想告诉你，遇见你是命运最美的安排，而能够成为你的丈夫是我最大的荣幸。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;愿你的每一天都如阳光般灿烂，每一个微笑都能照亮我的世界。希望新的一岁里，健康、快乐永远伴随着你；愿所有的梦想都能实现，所有的期待都不会落空。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;感谢你一直以来的支持和陪伴，让我们一起继续书写属于我们的故事。未来的日子里，不管风雨还是晴空，我都愿意牵着你的手，一同面对，共同成长。</span><br>
-                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;亲爱的，生日快乐！愿我们的爱情如同美酒，越陈越香；愿我们的生活似诗篇，字字珠玑。再次祝你生日快乐，我爱你！</span>
+                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;今天是个特别的日子，不仅是你的生日，也是我们这个小小幸福世界的重要时刻之一。</span><br>
+                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;过去的这些日子，你付出了很多，无论是迎接二宝的到来，还是照顾我们的家，都让我更加明白你的辛劳与伟大。新的一岁里，我希望你能在忙碌之余多些放松，身体恢复得更好，心情也一直愉快。两个宝宝的健康成长，会成为我们最大的欣慰，而你始终是这个家最温暖的力量。</span><br>
+                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;谢谢你，为我、为我们的孩子，倾注了这么多的爱。未来无论是平凡还是特别，我都会陪在你身边，共同走过每一个日升月落。</span><br>
+                    <span class="say">&nbsp;&nbsp;&nbsp;&nbsp;亲爱的，生日快乐！愿你的每一天都充满幸福的光芒，也愿我们的家因为有你而更加美好温馨。</span>
                 </font>
             </div>
         </div>
@@ -119,6 +119,11 @@
         var hold = 1;
 
         canvas.click(function (e) {
+            var audio = document.getElementById('birthday-audio');
+            audio.play().catch(function(error) {
+                console.error('播放失败:', error);
+            });
+
             var offset = canvas.offset(), x, y;
             x = e.pageX - offset.left;
             y = e.pageY - offset.top;
@@ -292,7 +297,7 @@
                     // 增加透明度动画
                     gift.animate({opacity: 0}, 500, function () {
                         gift.remove();
-                        gifts.splice(index1, 1);
+                        gifts.splice(index, 1);
                     });
                 } else {
                     gift.css('top', top + 2 + 'px');
@@ -307,7 +312,7 @@
                     // 增加透明度动画
                     cake.animate({opacity: 0}, 500, function () {
                         cake.remove();
-                        cakes.splice(index1, 1);
+                        cakes.splice(index, 1);
                     });
                 } else {
                     cake.css('top', top + 2 + 'px');
@@ -349,7 +354,7 @@
         function getRandomErrorMessage() {
             if (usedIndexes.length === errorMessages.length) {
                 // 如果所有提示都已使用，返回一个默认提示
-                return "这么久都没答上来，让我来告诉你吧，正确的日期是：20180217";
+                return "我来告诉你吧，正确的日期是：20180217";
             }
 
             let randomIndex;

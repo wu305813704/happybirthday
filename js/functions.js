@@ -1,8 +1,8 @@
 // variables
 
 //打字等待时间
-// var wait = 75;
-var wait = 1;
+var wait = 75;
+// var wait = 1;
 //树叶生成速度
 // var createSpeed = 1;
 var createSpeed = 10;
